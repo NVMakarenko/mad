@@ -1,0 +1,29 @@
+<h2>Please, import magnetometer data</h2>
+
+<div>
+    <%=form_tag import_magnetometers_path, multipart: true do%>
+      <%= file_field_tag :file %>
+      <%= submit_tag "Import location"%>
+    <%end%>
+</div>
+
+<%= flash[:notice]%>
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Z</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%if @magnetometers.first != nil%>
+      <%for i in 1..10 do%>
+        <tr>
+          <td><%=@magnetometers.find_by_id(i).vector_mag %></td>
+        </tr
+        <%end%>
+      <%end%>
+    </tbody>
+  </table>
+</div>
