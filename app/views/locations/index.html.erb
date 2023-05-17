@@ -1,0 +1,31 @@
+<h2>Please, dowload moving platform data</h2>
+
+<div>
+    <%=form_tag import_locations_path, multipart: true do%>
+      <%= file_field_tag :file %>
+      <%= submit_tag "Import location"%>
+    <%end%>
+</div>
+
+<%= flash[:notice]%>
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>X</th>
+        <th>Y</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%if @locations.first != nil%>
+      <%for i in 1..10 do%>
+        <tr>
+          <td><%=@locations.find_by_id(i).x_loc  %></td>
+          <td><%=@locations.find_by_id(i).y_loc  %></td>
+        </tr
+        <%end%>
+      <%end%>
+    </tbody>
+  </table>
+</div>
