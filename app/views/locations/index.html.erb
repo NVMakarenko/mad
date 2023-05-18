@@ -28,4 +28,5 @@
       <%end%>
     </tbody>
   </table>
+  <%= line_chart Location.group(:x_loc).count(:y_loc)%>
 </div>

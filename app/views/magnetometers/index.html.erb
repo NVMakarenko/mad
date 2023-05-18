@@ -10,6 +10,11 @@
 <%= flash[:notice]%>
 
 <div>
+  <h2>Magnetometer data chart</h2>
+  <%= line_chart Magnetometer.group(:id).sum(:vector_mag),ytitle: "Vector, mT"%>
+  <%= line_chart Magnetometer.group(:id).sum(:x_mag), ytitle: "X, mT"%>
+  <%= line_chart Magnetometer.group(:id).sum(:y_mag), ytitle: "Y, mT"%>
+  <%= line_chart Magnetometer.group(:id).sum(:z_mag), ytitle: "Z, mT"%>
   <table>
     <thead>
       <tr>
