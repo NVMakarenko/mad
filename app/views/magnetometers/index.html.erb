@@ -3,7 +3,7 @@
 <div>
     <%=form_tag import_magnetometers_path, multipart: true do%>
       <%= file_field_tag :file %>
-      <%= submit_tag "Import location"%>
+      <%= submit_tag "Import magnetometer data"%>
     <%end%>
 </div>
 
@@ -13,13 +13,19 @@
   <table>
     <thead>
       <tr>
+        <th>X</th>
+        <th>Y</th>
         <th>Z</th>
+        <th>Vector</th>
       </tr>
     </thead>
     <tbody>
       <%if @magnetometers.first != nil%>
       <%for i in 1..10 do%>
         <tr>
+          <td><%=@magnetometers.find_by_id(i).x_mag %></td>
+          <td><%=@magnetometers.find_by_id(i).y_mag %></td>
+          <td><%=@magnetometers.find_by_id(i).z_mag %></td>
           <td><%=@magnetometers.find_by_id(i).vector_mag %></td>
         </tr
         <%end%>
