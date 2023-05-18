@@ -9,14 +9,14 @@ default: &default
 
 development:
   <<: *default
-  database: myapp_ror_development
+  database: mad_development
 
 test:
   <<: *default
-  database: myapp_ror_test
+  database: mad_test
 
 production:
   <<: *default
-  database: myapp_ror_production
-  username: myapp_ror
+  database: mad_production
+  username: mad
   password: <%= ENV["MYAPP_ROR_DATABASE_PASSWORD"] %>

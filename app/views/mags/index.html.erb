@@ -1,0 +1,36 @@
+<h2>Please, import location and magnetometer data</h2>
+
+<div>
+    <%=form_tag import_mags_path, multipart: true do%>
+      <%= file_field_tag :file %>
+      <%= file_field_tag :file1 %>
+      <%= submit_tag "Import data"%>
+    <%end%>
+</div>
+<div>
+
+</div>
+<%= flash[:notice]%>
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>X - platform position</th>
+        <th>Y - platform position</th>
+        <th>Z - magnetometer data in this spot</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%if @mags.first != nil%>
+      <%for i in 1..10 do%>
+        <tr>
+          <td><%=@mags.find_by_id(i).x %></td>
+          <td><%=@mags.find_by_id(i).y %></td>
+          <td><%=@mags.find_by_id(i).z %></td>
+        </tr
+        <%end%>
+      <%end%>
+    </tbody>
+  </table>
+</div>
