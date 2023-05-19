@@ -11,7 +11,16 @@
 
 </div>
 <%= flash[:notice]%>
-
+<div>
+  <%= line_chart [
+    { name: "Magnetometer Data",
+      data: Mag.group(:id).sum(:z), points: false},
+    { name: "NORMAL_MAX",
+      data: Mag.group(:id).sum(65), points: false},
+    { name: "NORMAL_MIN",
+      data: Mag.group(:id).sum(25), points: false, colors: ["#666"]}
+  ]%>
+</div>
 <div>
   <table>
     <thead>
@@ -23,12 +32,13 @@
     </thead>
     <tbody>
       <%if @mags.first != nil%>
-      <%for i in 1..10 do%>
-        <tr>
-          <td><%=@mags.find_by_id(i).x %></td>
-          <td><%=@mags.find_by_id(i).y %></td>
-          <td><%=@mags.find_by_id(i).z %></td>
-        </tr
+      <%mag_an_det = mad(@mags)%>
+        <%mag_an_det.each do |mags|%>
+          <tr>
+              <td><%=mags.x %></td>
+              <td><%=mags.y %></td>
+              <td><%=mags.z %></td>
+            </tr>
         <%end%>
       <%end%>
     </tbody>

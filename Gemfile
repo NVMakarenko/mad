@@ -20,6 +20,10 @@ gem 'puma', '~> 5.0'
 # rubocop
 gem 'rubocop', '~> 1.51'
 
+# charts
+gem 'chartkick'
+gem 'highcharts-rails'
+
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
 
