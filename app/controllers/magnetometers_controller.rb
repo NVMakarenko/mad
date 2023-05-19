@@ -3,6 +3,7 @@
 class MagnetometersController < ApplicationController
   def index
     @magnetometers = Magnetometer.all
+    @chart_xyz = `python lib/assets/python/chart_xyz.py @magnetometers`
   end
 
   def import
