@@ -11,10 +11,20 @@
 
 <div>
   <h2>Magnetometer data chart</h2>
-  <%= line_chart Magnetometer.group(:id).sum(:vector_mag),ytitle: "Vector, mT"%>
-  <%= line_chart Magnetometer.group(:id).sum(:x_mag), ytitle: "X, mT"%>
-  <%= line_chart Magnetometer.group(:id).sum(:y_mag), ytitle: "Y, mT"%>
-  <%= line_chart Magnetometer.group(:id).sum(:z_mag), ytitle: "Z, mT"%>
+  <%= line_chart [
+  { name: "Magnetometer Vector sum",
+    data: Magnetometer.group(:id).sum(:vector_mag), points: false},
+  { name: "Magnetometer X",
+    data: Magnetometer.group(:id).sum(:x_mag), points: false},
+  { name: "Magnetometer Y",
+    data: Magnetometer.group(:id).sum(:y_mag), points: false},
+  { name: "Magnetometer Z",
+    data: Magnetometer.group(:id).sum(:z_mag), points: false},
+  { name: "NORMAL_MAX",
+    data: Magnetometer.group(:id).sum(65), points: false},
+  { name: "NORMAL_MIN",
+    data: Magnetometer.group(:id).sum(25), points: false}
+]%>
   <table>
     <thead>
       <tr>
