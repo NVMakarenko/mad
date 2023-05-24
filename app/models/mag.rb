@@ -14,13 +14,9 @@ class Mag < ApplicationRecord
     header_magnetometer = %i[x_mag y_mag z_mag]
 
     i = 0
-    arr = CSV.read(file.path, headers: header)
+    location_data = CSV.read(file.path, headers: header)
     CSV.foreach(file1.path, headers: header_magnetometer) do |row|
-      location = arr[i].to_h
-      mag_data = row.to_hash
-      option = Math.sqrt(mag_data[:x_mag].to_f**2 + mag_data[:y_mag].to_f**2 + mag_data[:z_mag].to_f**2).round(4).to_s
-      vector = { z: option }
-      Mag.create! location.merge(vector)
+      Mag.create! form_data(location_data[i],row)
       i += 1
     end
   end
@@ -30,5 +26,13 @@ class Mag < ApplicationRecord
       "TRUNCATE TABLE #{table_name};"
     )
     connection.reset_pk_sequence!(table_name)
+  end
+
+  def self.form_data( location_data, row )
+    location_dot = location_data.to_h
+    mag_data = row.to_hash
+    option = Math.sqrt(mag_data[:x_mag].to_f**2 + mag_data[:y_mag].to_f**2 + mag_data[:z_mag].to_f**2).round(4).to_s
+    vector = { z: option }
+    location_dot.merge(vector)
   end
 end
