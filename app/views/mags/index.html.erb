@@ -14,12 +14,21 @@
 <div>
   <%= line_chart [
     { name: "Magnetometer Data",
-      data: Mag.group(:id).sum(:vector_mag), points: false},
+      data: Mag.pluck(:id,:vector_mag), points: false},
     { name: "NORMAL_MAX",
-      data: Mag.group(:id).sum(65), points: false},
+      data: Mag.pluck(:id, 65), points: false},
     { name: "NORMAL_MIN",
-      data: Mag.group(:id).sum(25), points: false},
-  ]%>
+      data: Mag.pluck(:id, 25), points: false},
+  ], colors: ["#003ebb", "#b00", "#b00"]%>
+</div>
+<%mag_anomaly_detect = mad(@mags)%>
+<div>
+  <%= scatter_chart [
+    { name: "Magnetic anomaly Location",
+      data: mag_anomaly_detect.pluck(:x_loc, :y_loc)},
+    { name: "Platform movement",
+      data: Mag.pluck(:x_loc, :y_loc)}
+  ], colors: ["#e30000", "#00bb3e"]%>
 </div>
 <div>
   <table>
@@ -32,8 +41,7 @@
     </thead>
     <tbody>
       <%if @mags.first != nil%>
-      <%mag_an_det = mad(@mags)%>
-        <%mag_an_det.each do |mags|%>
+        <%mag_anomaly_detect.each do |mags|%>
           <tr>
               <td><%=mags.x_loc %></td>
               <td><%=mags.y_loc %></td>
