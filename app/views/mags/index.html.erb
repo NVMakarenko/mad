@@ -14,11 +14,11 @@
 <div>
   <%= line_chart [
     { name: "Magnetometer Data",
-      data: Mag.group(:id).sum(:z), points: false},
+      data: Mag.group(:id).sum(:vector_mag), points: false},
     { name: "NORMAL_MAX",
       data: Mag.group(:id).sum(65), points: false},
     { name: "NORMAL_MIN",
-      data: Mag.group(:id).sum(25), points: false}
+      data: Mag.group(:id).sum(25), points: false},
   ]%>
 </div>
 <div>
@@ -35,9 +35,9 @@
       <%mag_an_det = mad(@mags)%>
         <%mag_an_det.each do |mags|%>
           <tr>
-              <td><%=mags.x %></td>
-              <td><%=mags.y %></td>
-              <td><%=mags.z %></td>
+              <td><%=mags.x_loc %></td>
+              <td><%=mags.y_loc %></td>
+              <td><%=mags.vector_mag %></td>
             </tr>
         <%end%>
       <%end%>
