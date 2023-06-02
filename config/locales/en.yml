@@ -6,6 +6,7 @@ en:
     mag_field_min: Normal magnetic field, minimum
     magl: Magnetic anomaly Location
     playform_move: Platform movement
+  error_add_file: Please, add location file and magnetometer file
   import_location: Please, import location and magnetometer data
   magnetometer_value: Magnetometer value Vector sum, mT
   ma_table: Magnetic Anomaly Detection

@@ -14,13 +14,14 @@ class Mag < ApplicationRecord
     header_magnetometer = %i[x_mag y_mag z_mag]
 
     i = 0
-    location_data = CSV.read(file.path, headers: header)
-    CSV.foreach(file1.path, headers: header_magnetometer) do |row|
-      mag_dot = location_data[i].to_hash.merge(form_mag_data(row))
+    return if file.nil? || file1.nil?
+      location_data = CSV.read(file.path, headers: header)
+      CSV.foreach(file1.path, headers: header_magnetometer) do |row|
+        mag_dot = location_data[i].to_hash.merge(form_mag_data(row))
 
-      Mag.create! mag_dot
-      i += 1
-    end
+        Mag.create! mag_dot
+        i += 1
+      end
   end
 
   def truncate!

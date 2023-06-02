@@ -7,6 +7,7 @@ class MagsController < ApplicationController
 
   def import
     Mag.import(params[:file], params[:file1])
-    redirect_to root_url, notice: 'Data imported.'
+    redirect_to root_url, notice: t(:error_add_file) if Mag.first.nil?
+    redirect_to root_url, notice: t(:data_import_notice) unless Mag.first.nil?
   end
 end
