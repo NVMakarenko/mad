@@ -6,8 +6,19 @@ class MagsController < ApplicationController
   end
 
   def import
-    Mag.import(params[:file], params[:file1])
-    redirect_to root_url, notice: t(:error_add_file) if Mag.first.nil?
+    reset_db
+    result = Mag.import(params[:file], params[:file1])
+    redirect_to root_url, notice: result if Mag.first.nil?
     redirect_to root_url, notice: t(:data_import_notice) unless Mag.first.nil?
+  end
+
+  private
+
+  def reset_db
+    conn = ActiveRecord::Base.connection
+    tables = ActiveRecord::Base.connection.tables
+    tables.each { |t| conn.execute("TRUNCATE #{t}") }
+
+    Rails.application.load_seed
   end
 end

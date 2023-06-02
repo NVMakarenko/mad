@@ -5,30 +5,26 @@ class Mag < ApplicationRecord
   require 'csv'
 
   def self.import(file, file1)
-    ActiveRecord::Base.connection.tables.each do |t|
-      conn = ActiveRecord::Base.connection
-      conn.execute("TRUNCATE TABLE #{t} CASCADE;")
-      conn.reset_pk_sequence!(t)
-    end
-    header = %i[x_loc y_loc]
-    header_magnetometer = %i[x_mag y_mag z_mag]
+    return I18n.t(:error_add_file) if file.nil?
+    return I18n.t(:error_add_file1) if file1.nil?
+    return I18n.t(:error_file_extansion) if File.extname(file) != '.csv'
+    return I18n.t(:error_file1_extansion) if File.extname(file1) != '.csv'
 
-    i = 0
-    return if file.nil? || file1.nil?
-      location_data = CSV.read(file.path, headers: header)
-      CSV.foreach(file1.path, headers: header_magnetometer) do |row|
-        mag_dot = location_data[i].to_hash.merge(form_mag_data(row))
-
-        Mag.create! mag_dot
-        i += 1
-      end
+    return read_files(file,file1)  
   end
 
-  def truncate!
-    connection.execute(
-      "TRUNCATE TABLE #{table_name};"
-    )
-    connection.reset_pk_sequence!(table_name)
+  def self.read_files(file,file1)
+    header = %i[x_loc y_loc]
+    header_magnetometer = %i[x_mag y_mag z_mag]
+    i = 0
+
+    location_data = CSV.read(file.path, headers: header)
+    CSV.foreach(file1.path, headers: header_magnetometer) do |row|
+      mag_dot = location_data[i].to_hash.merge(form_mag_data(row))
+      return I18n.t(:error_data) if mag_dot.has_key?(nil) || mag_dot.value?(nil)
+      Mag.create! mag_dot
+      i += 1
+    end
   end
 
   def self.form_mag_data(row)

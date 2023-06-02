@@ -6,7 +6,11 @@ en:
     mag_field_min: Normal magnetic field, minimum
     magl: Magnetic anomaly Location
     playform_move: Platform movement
-  error_add_file: Please, add location file and magnetometer file
+  error_add_file: Please, add location file
+  error_add_file1: Please, add magnetometer file
+  error_file_extansion: "Please, check location file's extension. It should be .csv"
+  error_file1_extansion: "Please, check magnetometer file's extension. It should be .csv"
+  error_data: Please, check your file's content, no data proper in file.
   import_location: Please, import location and magnetometer data
   magnetometer_value: Magnetometer value Vector sum, mT
   ma_table: Magnetic Anomaly Detection

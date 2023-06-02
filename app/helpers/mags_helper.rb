@@ -9,5 +9,4 @@ module MagsHelper
     arr.each { |h| filtered_mag << h if h[:vector_mag] < NORMAL_MIN || h[:vector_mag] > NORMAL_MAX }
     filtered_mag
   end
-
 end
