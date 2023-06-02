@@ -1,0 +1,25 @@
+body {
+  text-align: center;
+}
+div {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+hr {
+    display: block;
+    height: 30px;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+    border-color:#DEE0F2;
+}
+
+.btn{
+  width: 200px;
+}
+.col {
+  text-align: center;
+}
