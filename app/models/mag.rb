@@ -10,7 +10,7 @@ class Mag < ApplicationRecord
     return I18n.t(:error_file_extansion) if File.extname(file) != '.csv'
     return I18n.t(:error_file1_extansion) if File.extname(file1) != '.csv'
 
-    return read_files(file,file1)  
+    return read_files(file,file1)
   end
 
   def self.read_files(file,file1)
