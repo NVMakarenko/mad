@@ -15,10 +15,10 @@ class MagsController < ApplicationController
   private
 
   def reset_db
-    conn = ActiveRecord::Base.connection
-    tables = ActiveRecord::Base.connection.tables
-    tables.each { |t| conn.execute("TRUNCATE #{t}") }
-
-    Rails.application.load_seed
+    ActiveRecord::Base.connection.tables.each do |t|
+      conn = ActiveRecord::Base.connection
+      conn.execute("TRUNCATE TABLE #{t} CASCADE;")
+      conn.reset_pk_sequence!(t)
+    end
   end
 end
