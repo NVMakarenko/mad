@@ -18,6 +18,4 @@ test:
 production:
   <<: *default
   database: mad_production
-  username: mad
-  password: <%= ENV["MYAPP_ROR_DATABASE_PASSWORD"] %>
   url: <%= ENV['DATABASE_URL'] %>
